@@ -1,12 +1,8 @@
 # cognitiveabilitieseval
 Cognitive Abilities (Mental capabilities for processing information)
-Verbal Comprehension
+Verbal Comprehension: Understanding and interpreting written or spoken words and sentences.
 
-Understanding and interpreting written or spoken words and sentences.
-
-Verbal Expression
-
-Communicating information and ideas clearly using words.
+Verbal Expression: Communicating information and ideas clearly using words.
 
 Numerical Ability
 
