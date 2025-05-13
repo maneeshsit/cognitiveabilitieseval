@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognitive & Knowledge-Based Abilities Assessment</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h2 { margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    .total { font-weight: bold; font-size: 1.2em; }
+  </style>
+</head>
+<body>
+  <h1>Cognitive & Knowledge-Based Abilities Assessment</h1>
+
+  <form id="assessmentForm">
+    <h2>Cognitive Abilities</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Ability</th>
+          <th>Assessed?</th>
+          <th>Difficulty Level (1-5)</th>
+        </tr>
+      </thead>
+      <tbody id="cognitiveAbilities"></tbody>
+    </table>
+
+    <h2>Knowledge-Based Abilities</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Ability</th>
+          <th>Assessed?</th>
+          <th>Difficulty Level (1-5)</th>
+        </tr>
+      </thead>
+      <tbody id="knowledgeAbilities"></tbody>
+    </table>
+
+    <button type="button" onclick="calculateScore()">Calculate Total Score</button>
+    <p class="total">Final Score: <span id="finalScore">0</span></p>
+  </form>
+
+  <script>
+    const cognitiveAbilities = [
+      "Verbal Comprehension",
+      "Verbal Expression",
+      "Numerical Ability",
+      "Number Facility",
+      "Deductive Reasoning",
+      "Inductive Reasoning",
+      "Problem Sensitivity",
+      "Originality",
+      "Fluency of Ideas",
+      "Perceptual Speed",
+      "Spatial Orientation",
+      "Visualization",
+      "Memory (Short-term and Long-term)",
+      "Speed of Closure",
+      "Flexibility of Closure"
+    ];
+
+    const knowledgeAbilities = [
+      "Mathematical Knowledge",
+      "Language and Communication Knowledge",
+      "Technical or Domain-Specific Knowledge"
+    ];
+
+    function populateTable(list, elementId) {
+      const tableBody = document.getElementById(elementId);
+      list.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${item}</td>
+          <td><input type="checkbox" name="assessed-${elementId}-${index}" /></td>
+          <td>
+            <select name="level-${elementId}-${index}">
+              <option value="0">0</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    function calculateScore() {
+      let score = 0;
+      let totalItems = 0;
+      const form = document.getElementById('assessmentForm');
+      const inputs = form.querySelectorAll('input[type="checkbox"]');
+      const selects = form.querySelectorAll('select');
+
+      inputs.forEach((checkbox, i) => {
+        const select = selects[i];
+        if (checkbox.checked) {
+          score += parseInt(select.value);
+          totalItems++;
+        }
+      });
+
+      document.getElementById('finalScore').innerText = `${score} / ${totalItems * 5}`;
+    }
+
+    populateTable(cognitiveAbilities, 'cognitiveAbilities');
+    populateTable(knowledgeAbilities, 'knowledgeAbilities');
+  </script>
+</body>
+</html>
